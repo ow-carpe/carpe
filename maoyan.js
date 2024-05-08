@@ -7,7 +7,7 @@
 使用声明：⚠️仅供参考，🈲转载与售卖
 **************************************
 [rewrite_local]
-^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2 url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
+^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 [mitm]
 hostname = yanchu.maoyan.com
 *************************************/
@@ -38,8 +38,9 @@ if (url.includes("yanchu.maoyan.com") && body) {
     obj.code = 200;
     obj.success = true;
   }
-  if (url.includes("salesplans")) {
+  if (url.includes("/myshow/ajax/performance/show")) {
     obj.code = 200;
+    obj.success = true;
   }
   $done({ body: JSON.stringify(obj) });
 } else {
