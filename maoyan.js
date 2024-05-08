@@ -4,7 +4,7 @@
 更新日期：2024-04-12
 脚本作者：chxm1023
 电报频道：https://t.me/chxm1023
-使用声明：⚠️仅供参考，🈲转载与售卖！
+使用声明：⚠️仅供参考，🈲转载与售卖
 **************************************
 [rewrite_local]
 ^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2 url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
@@ -27,7 +27,6 @@ const topUrl = /operation\/homefeatures/;
 if (url.includes("yanchu.maoyan.com")) {
   if (url.includes("/myshow/ajax/v2/performance")) {
     chxm1023.data.saleStatus = 3;
-    
   }
   if (url.includes("/myshow/ajax/v2/show")) {
     chxm1023.data.forEach(item => {
@@ -39,10 +38,6 @@ if (url.includes("yanchu.maoyan.com")) {
       item.stockable = true;
       item.remainingStock = 6;
     });
-  }
-  if (url.includes("validateStock")) {
-    chxm1023.code = 200;
-    chxm1023.success = true;
   }
 }
 chxm1024.body = JSON.stringify(chxm1023);
