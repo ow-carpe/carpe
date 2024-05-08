@@ -41,10 +41,8 @@ if (url.includes("yanchu.maoyan.com")) {
     });
   }
   if (url.includes("/myshow/ajax/v2/showTickets/validateStock")) {
-    chxm1023.success = true;
     chxm1023.code = 200;
-    chxm1023.data = null;
-    chxm1023.code = 1500;
+    chxm1023.success = true;
   }
  
 }
