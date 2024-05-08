@@ -43,6 +43,14 @@ if (url.includes("yanchu.maoyan.com") && body) {
     obj.code = 200;
     obj.success = true;
     obj.msg = "";
+    if (obj.data) {
+      obj.data.forEach(item => {
+      item.hasInventory = true;
+      item.sellStatus = 3;
+      item.currentAmount = 6;
+      item.maxBuyLimit = 6;
+    });
+    }
   }
   $done({ body: JSON.stringify(obj) });
 } else {
