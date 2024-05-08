@@ -43,9 +43,8 @@ if (url.includes("yanchu.maoyan.com")) {
   if (url.includes("/myshow/ajax/v2/showTickets/validateStock")) {
     chxm1023.code = 200;
     chxm1023.success = true;
-    $notify("写入京东Cookie失败", "", "已尝试清空历史Cookie, 请重试 ⚠️");
   }else{
-    $notify("写入京东Cookie失败a", "", "已尝试清空历史Cookie, 请重试a ⚠️");
+    chxm1023.code = 200;
  
 }
 
