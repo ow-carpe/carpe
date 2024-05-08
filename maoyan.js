@@ -32,8 +32,11 @@ if (url.includes("yanchu.maoyan.com")) {
     chxm1023.data.forEach(item => {
       item.salesPlanVO.hasInventory = true;
       item.salesPlanVO.sellStatus = 3;
+      item.salesPlanVO.currentAmount = 6;
+      item.salesPlanVO.maxBuyLimit = 6;
       item.showStatus = 0;
       item.stockable = true;
+      item.remainingStock = 6;
     });
   }
 }
