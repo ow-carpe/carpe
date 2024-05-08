@@ -38,11 +38,9 @@ if (url.includes("yanchu.maoyan.com") && body) {
     obj.code = 200;
     obj.success = true;
   }
-  if (url.includes("/myshow/ajax/performance/show")) {
+  if (url.includes("myshow/ajax/performance/show")) {
     obj.code = 200;
-    obj.data.code = 200;
     obj.msg = "aaa";
-    obj.data.msg = "aaa";
     obj.success = true;
   }
   $done({ body: JSON.stringify(obj) });
