@@ -51,6 +51,7 @@ if (typeof $response == "undefined") {
     case userUrl.test(url):
       carpebody.data.hasInventory = true;
        carpebody.data.data.forEach(item => {
+         item.hasInventory = true;
             item.salesPlanVO.hasInventory = true;
             item.salesPlanVO.sellStatus = 3;
         });
