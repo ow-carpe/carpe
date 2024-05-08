@@ -34,9 +34,10 @@ if (url.includes("yanchu.maoyan.com") && body) {
       item.remainingStock = 6;
     });
   }
-  if (url.includes("showTickets/validateStock") && obj.data) {
+  if (url.includes("showTickets/validateStock")) {
     obj.code = 200;
     obj.success = true;
+    obj.data.code = 200;
   }
   $done({ body: JSON.stringify(obj) });
 } else {
