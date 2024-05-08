@@ -49,5 +49,7 @@ if (url.includes("yanchu.maoyan.com")) {
   }
 }
 chxm1024.body = JSON.stringify(chxm1023);
-
+if ($request.method === "POST") {
+    chxm1024.body = {"code":200};
+  }
 $done(chxm1024);
