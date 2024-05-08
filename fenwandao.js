@@ -21,6 +21,8 @@ if (url.includes("api.livelab.com.cn") && body) {
   }
   if (url.includes("project/get_performs") && obj.data) {
     obj.data.performInfos[0].performInfo[0].seatPlans.forEach(item => {
+      item.status = 22;
+      item.tags = [];
       item.display = 1;
     });
   }
