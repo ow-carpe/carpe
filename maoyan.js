@@ -29,11 +29,11 @@ const syUrl = /trial_card\/info/;
 const qyUrl = /entries/;
 const peUrl = /privileges/;
 const topUrl = /operation\/homefeatures/;
-if (url.includes("yanchu.maoyan.com")) {
-  if (url.includes("myshow/ajax/v2/performance")) {
+if (url.indexOf("yanchu.maoyan.com") !== -1) {
+  if (url.indexOf("myshow/ajax/v2/performance") !== -1) {
      body.data.saleStatus = 3;
   }
- if (url.includes("myshow/ajax/v2/show")) {
+ if (url.indexOf("myshow/ajax/v2/show") !== -1) {
   body.data.forEach(item => 
             item.salesPlanVO.hasInventory = true;
             item.salesPlanVO.sellStatus = 3;
