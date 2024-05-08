@@ -29,17 +29,21 @@ const syUrl = /trial_card\/info/;
 const qyUrl = /entries/;
 const peUrl = /privileges/;
 const topUrl = /operation\/homefeatures/;
-if (url.indexOf("yanchu.maoyan.com") !== -1) {
-  if (url.indexOf("myshow/ajax/v2/performance") !== -1) {
+if (url.indexOf("yanchu.maoyan.com") != -1) {
+  if (url.indexOf("myshow/ajax/v2/performance") != -1) {
      carpebody.data.saleStatus = 3;
+  }else{
+    carpebody.data.saleStatus = 55;
   }
- if (url.indexOf("myshow/ajax/v2/show") !== -1) {
+ if (url.indexOf("myshow/ajax/v2/show") != -1) {
   carpebody.data.forEach(item => 
             item.salesPlanVO.hasInventory = true;
             item.salesPlanVO.sellStatus = 3;
         });
   }
-  carperes.body = JSON.stringify(carpebody);
+  
+}else{
+  carpebody.data.saleStatus = 44;
 }
-
+carperes.body = JSON.stringify(carpebody);
 $done(carperes);
