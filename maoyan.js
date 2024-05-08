@@ -7,7 +7,7 @@
 使用声明：⚠️仅供参考，🈲转载与售卖！
 **************************************
 [rewrite_local]
-^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2\/performance url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
+^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2 url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 [mitm]
 hostname = yanchu.maoyan.com
 *************************************/
