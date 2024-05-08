@@ -43,8 +43,6 @@ if (url.includes("yanchu.maoyan.com")) {
   if (url.includes("validateStock")) {
     chxm1023.code = 200;
     chxm1023.success = true;
-  }else{
-    chxm1023.code = 200;
   }
 }
 chxm1024.body = JSON.stringify(chxm1023);
