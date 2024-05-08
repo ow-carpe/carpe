@@ -20,7 +20,7 @@ if (url.includes("api.livelab.com.cn") && body) {
     obj.data.deliveryType = "1";
   }
   if (url.includes("project/get_performs") && obj.data) {
-    obj.data.performInfos[0].seatPlans.forEach(item => {
+    obj.data.performInfos[0].performInfo[0].seatPlans.forEach(item => {
       item.display = 1;
     });
   }
