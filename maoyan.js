@@ -24,8 +24,16 @@ const syUrl = /trial_card\/info/;
 const qyUrl = /entries/;
 const peUrl = /privileges/;
 const topUrl = /operation\/homefeatures/;
-if (url.includes("yanchu.maoyan.com/myshow/ajax/v2/performance")) {
-  chxm1023.data.saleStatus = 3;
+if (url.includes("yanchu.maoyan.com")) {
+  if (url.includes("/myshow/ajax/v2/performance")) {
+    chxm1023.data.saleStatus = 3;
+  }
+  if (url.includes("/myshow/ajax/v2/show")) {
+    chxm1023.data.forEach(item => {
+      item.salesPlanVO.hasInventory = true;
+      item.salesPlanVO.sellStatus = 3;
+    });
+  }
 }
 chxm1024.body = JSON.stringify(chxm1023);
 
