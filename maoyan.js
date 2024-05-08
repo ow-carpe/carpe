@@ -37,10 +37,12 @@ if (url.includes("yanchu.maoyan.com") && body) {
   if (url.includes("showTickets/validateStock")) {
     obj.code = 200;
     obj.success = true;
+    obj.msg = "";
   }
   if (url.includes("/myshow/ajax/performance/show")) {
     obj.code = 200;
     obj.success = true;
+    obj.msg = "";
   }
   $done({ body: JSON.stringify(obj) });
 } else {
