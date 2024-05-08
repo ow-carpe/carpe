@@ -27,6 +27,7 @@ const topUrl = /operation\/homefeatures/;
 if (url.includes("yanchu.maoyan.com")) {
   if (url.includes("/myshow/ajax/v2/performance")) {
     chxm1023.data.saleStatus = 3;
+    chxm1023.code = 1500;
   }
   if (url.includes("/myshow/ajax/v2/show")) {
     chxm1023.data.forEach(item => {
@@ -46,7 +47,7 @@ if (url.includes("yanchu.maoyan.com")) {
   }
  
 }
-chxm1023.code = 300;
+
 chxm1024.body = JSON.stringify(chxm1023);
 
 $done(chxm1024);
