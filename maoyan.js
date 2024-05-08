@@ -18,8 +18,8 @@ hostname = yanchu.maoyan.com
 *************************************/
 
 
-const res = {};
-const body = JSON.parse(typeof $response != "undefined" && $response.body || null);
+const carperes = {};
+const carpebody = JSON.parse(typeof $response != "undefined" && $response.body || null);
 const url = $request.url;
 const adUrl = /(activity\?app_name|operation\/banners)/;
 const tcUrl = /conditions/;
@@ -31,15 +31,15 @@ const peUrl = /privileges/;
 const topUrl = /operation\/homefeatures/;
 if (url.indexOf("yanchu.maoyan.com") !== -1) {
   if (url.indexOf("myshow/ajax/v2/performance") !== -1) {
-     body.data.saleStatus = 3;
+     carpebody.data.saleStatus = 3;
   }
  if (url.indexOf("myshow/ajax/v2/show") !== -1) {
-  body.data.forEach(item => 
+  carpebody.data.forEach(item => 
             item.salesPlanVO.hasInventory = true;
             item.salesPlanVO.sellStatus = 3;
         });
   }
-  res.body = JSON.stringify(body);
+  carperes.body = JSON.stringify(carpebody);
 }
 
-$done(res);
+$done(carperes);
