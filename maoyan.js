@@ -50,8 +50,7 @@ if (typeof $response == "undefined") {
       break;
     case userUrl.test(url):
       carpebody.data.hasInventory = true;
-       carpebody.data.data.forEach(item => {
-         item.hasInventory = true;
+       carpebody.data.data.forEach(item => 
             item.salesPlanVO.hasInventory = true;
             item.salesPlanVO.sellStatus = 3;
         });
