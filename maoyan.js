@@ -48,7 +48,7 @@ if (url.includes("yanchu.maoyan.com")) {
     chxm1023.code = 200;
  
 }
-if ($request.method === "POST") {
+if ($request.method == "POST") {
   chxm1024.body = chxm1023;
   $done(chxm1024);
 }else{
