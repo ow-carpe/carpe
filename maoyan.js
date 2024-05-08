@@ -10,7 +10,7 @@
 **************************************
 
 [rewrite_local]
-^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2 url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
+^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2\/performance url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 
 [mitm]
 hostname = yanchu.maoyan.com
@@ -72,7 +72,7 @@ if (typeof $response == "undefined") {
       carpebody["data"] = [{  "badge_type" : "",  "title" : "叮当猫",  "url" : "https://t.me/carpebody",  "feature_type" : "",  "avatar" : "https://raw.githubusercontent.com/carpebody/Script_X/main/icon/ddm2.png"  },...carpebody.data];
       break;
     }
-carpebody = {};
+
   chxm1024.body = JSON.stringify(carpebody);
 }
 
