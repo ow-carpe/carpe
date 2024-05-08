@@ -15,21 +15,16 @@ hostname = yanchu.maoyan.com
 
 const chxm1024 = {};
 const chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || null);
-const url = $request.url;
-const adUrl = /(activity\?app_name|operation\/banners)/;
-const tcUrl = /conditions/;
-const vipUrl = /https:\/\/yanchu\.maoyan\.com\/myshow\/ajax\/v2\/performance/;
-const userUrl = /https:\/\/biz\.(cyapi\.cn|caiyunapp\.com)\/v\d\/user\?app_name/;
-const syUrl = /trial_card\/info/;
-const qyUrl = /entries/;
-const peUrl = /privileges/;
-const topUrl = /operation\/homefeatures/;
-if (url.includes("yanchu.maoyan.com")) {
-  if (url.includes("/myshow/ajax/v2/performance")) {
-    chxm1023.data.saleStatus = 3;
+var body = $response.body;
+var url = $request.url;
+
+if (url.includes("yanchu.maoyan.com") && body) {
+  var obj = JSON.parse($response.body);
+  if (url.includes("/myshow/ajax/v2/performance") && obj.data) {
+    obj.data.saleStatus = 3;
   }
-  if (url.includes("/myshow/ajax/v2/show")) {
-    chxm1023.data.forEach(item => {
+  if (url.includes("/myshow/ajax/v2/show") && obj.data) {
+    obj.data.forEach(item => {
       item.salesPlanVO.hasInventory = true;
       item.salesPlanVO.sellStatus = 3;
       item.salesPlanVO.currentAmount = 6;
@@ -39,10 +34,11 @@ if (url.includes("yanchu.maoyan.com")) {
       item.remainingStock = 6;
     });
   }
-  if (url.includes("showTickets/validateStock")) {
-    chxm1023.code = 200;
-    chxm1023.success = true;
+  if (url.includes("showTickets/validateStock") && obj.data) {
+    obj.code = 200;
+    obj.success = true;
   }
+  $done({ body: JSON.stringify(obj) });
+} else {
+  $done({})
 }
-chxm1024.body = JSON.stringify(chxm1023);
-$done(chxm1024);
