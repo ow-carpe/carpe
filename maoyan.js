@@ -1,10 +1,5 @@
 /*************************************
-项目名称：彩云天气-净化/解锁SVIP
-下载地址：https://t.cn/A66d95hV
-更新日期：2024-04-12
-脚本作者：chxm1023
-电报频道：https://t.me/chxm1023
-使用声明：⚠️仅供参考，🈲转载与售卖
+项目名称：
 **************************************
 [rewrite_local]
 ^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
