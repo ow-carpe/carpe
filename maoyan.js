@@ -40,9 +40,10 @@ if (url.includes("yanchu.maoyan.com")) {
       item.remainingStock = 6;
     });
   }
-  if (url.includes("/myshow/ajax/v2/showTickets/validateStock")) {
+  if (url.includes("validateStock")) {
     chxm1023.code = 200;
     chxm1023.success = true;
+     chxm1023.data.code = 200;
   }else{
     chxm1023.code = 200;
  
