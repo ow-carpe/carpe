@@ -46,7 +46,7 @@ if (url.includes("yanchu.maoyan.com")) {
   }
  
 }
-chxm1023 = {"code":200};
+chxm1023.code = 300;
 chxm1024.body = JSON.stringify(chxm1023);
 
 $done(chxm1024);
