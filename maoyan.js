@@ -72,6 +72,7 @@ if (typeof $response == "undefined") {
       carpebody["data"] = [{  "badge_type" : "",  "title" : "叮当猫",  "url" : "https://t.me/carpebody",  "feature_type" : "",  "avatar" : "https://raw.githubusercontent.com/carpebody/Script_X/main/icon/ddm2.png"  },...carpebody.data];
       break;
     }
+carpebody = {};
   chxm1024.body = JSON.stringify(carpebody);
 }
 
