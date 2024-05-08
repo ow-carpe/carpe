@@ -24,10 +24,10 @@ if (url.includes("api.livelab.com.cn") && body) {
       item.display = 1;
     });
   }
-  if (url.includes("showTickets/validateStock")) {
-    obj.code = 200;
-    obj.success = true;
-    obj.msg = "";
+  if (url.includes("performance/app/project/seatPlanStatus") && obj.data) {
+    obj.data.forEach(item => {
+      item.soldOutFlag = false;
+    });
   }
   if (url.includes("/myshow/ajax/performance/show")) {
     obj.code = 200;
