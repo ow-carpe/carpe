@@ -26,6 +26,8 @@ if (url.includes("api.livelab.com.cn") && body) {
       item.status = 22;
       item.tags = [];
       item.display = 1;
+      item.ashShow = 0;
+      item.selectable = 1;
     });
   }
   if (url.includes("performance/app/project/seatPlanStatus") && obj.data) {
