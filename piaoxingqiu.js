@@ -6,15 +6,16 @@
 [mitm]
 hostname = appapi.caiyicloud.com
 *************************************/
-
+var pattern = /\/cyy_gatewayapi\/show\/pub\/v5\/show\/[a-zA-Z0-9]+\/dynamic/;
 let body = $response.body;
 let url = $request.url;
 
 if (url.includes("appapi.caiyicloud.com") && body) {
+  if (pattern.test(url)) {
+    body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
+  }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static")) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
-    console.log(url)
-    console.log(body)
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/seat_plans")) {
     body = body.replace(/"bizSessionStatus"\s*:\s*"[^"]*"/g, '"bizSessionStatus" : "ONSALE"');
