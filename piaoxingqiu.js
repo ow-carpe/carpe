@@ -22,6 +22,8 @@ if (url.includes("appapi.caiyicloud.com") && body) {
     body = body.replace(/"hasStock":false/g, '"hasStock":true');
     body = body.replace(/("canBuyCount"\s*:\s*)\d+/g, '$16');
     body = body.replace(/"displayCountdownTime":true/g, '"displayCountdownTime":false');
+    body = body.replace(/"wrapDownTargetStatus"\s*:\s*"[^"]*"/g, '');
+    
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static")) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
