@@ -7,14 +7,10 @@
 hostname = yanchu.maoyan.com
 *************************************/
 
-
-const chxm1024 = {};
-const chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || null);
-var body = $response.body;
-var url = $request.url;
+let body = $response.body;
+let url = $request.url;
 
 if (url.includes("appapi.caiyicloud.com") && body) {
-  var obj = JSON.parse($response.body);
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static") && obj.data) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
   }
@@ -23,11 +19,9 @@ if (url.includes("appapi.caiyicloud.com") && body) {
     body = body.replace(/"sessionStatus"\s*:\s*"[^"]*"/g, '"sessionStatus" : "ON_SALE"');
     body = body.replace(/"hasSessionSoldOut":true/g, '"hasSessionSoldOut":false');
     body = body.replace(/"hasStock":false/g, '"hasStock":true');
-    
   }
-  
- 
-  $done({ body: JSON.stringify(obj) });
+  console.log(body)
+  $done({body});
 } else {
   $done({})
 }
