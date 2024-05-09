@@ -24,7 +24,7 @@ if (url.includes("yanchu.maoyan.com") && body) {
   if (url.includes("/myshow/ajax/v2/performance") && obj.data) {
     //obj.data.saleStatus = 3;
     //body = JSON.stringify(obj);
-    body = body.replace(/("saleStatus"\s*:\s*)\d+/g, '$13');
+    body = body.replace(/("saleStatus"\s*:\s*)\d+/g, '$15');
   }
   if (url.includes("/myshow/ajax/v2/show") && obj.data) {
     obj.data.forEach(item => {
