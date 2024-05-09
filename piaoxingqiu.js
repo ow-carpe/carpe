@@ -13,14 +13,18 @@ let url = $request.url;
 if (url.includes("appapi.caiyicloud.com") && body) {
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static")) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
+    console.log(url)
+    console.log(body)
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/session/")) {
     body = body.replace(/"bizSessionStatus"\s*:\s*"[^"]*"/g, '"bizSessionStatus" : "ONSALE"');
     body = body.replace(/"sessionStatus"\s*:\s*"[^"]*"/g, '"sessionStatus" : "ON_SALE"');
     body = body.replace(/"hasSessionSoldOut":true/g, '"hasSessionSoldOut":false');
     body = body.replace(/"hasStock":false/g, '"hasStock":true');
+    console.log(url)
+    console.log(body)
   }
-  console.log(body)
+  
   $done({body});
 } else {
   $done({})
