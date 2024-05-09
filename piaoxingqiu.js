@@ -21,9 +21,11 @@ if (url.includes("appapi.caiyicloud.com") && body) {
     body = body.replace(/"hasSessionSoldOut":true/g, '"hasSessionSoldOut":false');
     body = body.replace(/"hasStock":false/g, '"hasStock":true');
     body = body.replace(/("canBuyCount"\s*:\s*)\d+/g, '$16');
+    body = body.replace(/"displayCountdownTime":true/g, '"displayCountdownTime":false');
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static")) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
+    body = body.replace(/"displayCountdownTime":true/g, '"displayCountdownTime":false');
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/seat_plans")) {
     body = body.replace(/"bizSessionStatus"\s*:\s*"[^"]*"/g, '"bizSessionStatus" : "ONSALE"');
