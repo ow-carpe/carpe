@@ -4,7 +4,7 @@
 [rewrite_local]
 ^https:\/\/appapi\.caiyicloud\.com\/cyy_gatewayapi\/show url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/piaoxingqiu.js
 [mitm]
-hostname = yanchu.maoyan.com
+hostname = appapi.caiyicloud.com
 *************************************/
 
 let body = $response.body;
