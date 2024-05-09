@@ -16,7 +16,7 @@ if (url.includes("appapi.caiyicloud.com") && body) {
     console.log(url)
     console.log(body)
   }
-  if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/seat_plans/")) {
+  if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/seat_plans")) {
     body = body.replace(/"bizSessionStatus"\s*:\s*"[^"]*"/g, '"bizSessionStatus" : "ONSALE"');
     body = body.replace(/"sessionStatus"\s*:\s*"[^"]*"/g, '"sessionStatus" : "ON_SALE"');
     body = body.replace(/"hasSessionSoldOut":true/g, '"hasSessionSoldOut":false');
