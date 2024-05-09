@@ -26,39 +26,29 @@ if (url.includes("yanchu.maoyan.com") && body) {
     //body = JSON.stringify(obj);
     body = body.replace(/("saleStatus"\s*:\s*)\d+/g, '$15');
   }
-  if (url.includes("/myshow/ajax/v2/show") && obj.data) {
-    obj.data.forEach(item => {
-      item.salesPlanVO.hasInventory = true;
-      item.salesPlanVO.sellStatus = 3;
-      item.salesPlanVO.currentAmount = 6;
-      item.salesPlanVO.maxBuyLimit = 6;
-      item.showStatus = 0;
-      item.stockable = true;
-      item.remainingStock = 6;
-    });
-    body = JSON.stringify(obj);
+  if (url.includes("/myshow/ajax/v2/show")) {
+    body = body.replace(/"hasInventory":false/g, '"hasInventory":true');
+    body = body.replace(/("sellStatus"\s*:\s*)\d+/g, '$13');
+    body = body.replace(/("currentAmount"\s*:\s*)\d+/g, '$16');
+    body = body.replace(/("maxBuyLimit"\s*:\s*)\d+/g, '$16');
+    body = body.replace(/("showStatus"\s*:\s*)\d+/g, '$10');
+    body = body.replace(/"stockable":false/g, '"stockable":true');
+    body = body.replace(/("remainingStock"\s*:\s*)\d+/g, '$16');
   }
   if (url.includes("showTickets/validateStock")) {
-    obj.code = 200;
-    obj.success = true;
-    obj.msg = "";
-    body = JSON.stringify(obj);
+    body = body.replace(/("code"\s*:\s*)\d+/g, '$1200');
+    body = body.replace(/"success":false/g, '"success":true');
+    body = body.replace(/"msg"\s*:\s*"[^"]*"/g, '"msg" : ""');
   }
   if (url.includes("/myshow/ajax/performance/show")) {
-    obj.code = 200;
-    obj.success = true;
-    obj.msg = "";
-    if (obj.data) {
-      obj.data.forEach(item => {
-      item.hasInventory = true;
-      item.sellStatus = 3;
-      item.currentAmount = 6;
-      item.maxBuyLimit = 6;
-    });
-    }
-    body = JSON.stringify(obj);
+    body = body.replace(/("code"\s*:\s*)\d+/g, '$1200');
+    body = body.replace(/"success":false/g, '"success":true');
+    body = body.replace(/"msg"\s*:\s*"[^"]*"/g, '"msg" : ""');
+    body = body.replace(/"hasInventory":false/g, '"hasInventory":true');
+    body = body.replace(/("sellStatus"\s*:\s*)\d+/g, '$13');
+    body = body.replace(/("currentAmount"\s*:\s*)\d+/g, '$16');
+    body = body.replace(/("maxBuyLimit"\s*:\s*)\d+/g, '$16');
   }
-  
   $done({body});
 } else {
   $done({})
