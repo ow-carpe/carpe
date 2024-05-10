@@ -7,9 +7,6 @@
 hostname = api.livelab.com.cn
 *************************************/
 
-
-const chxm1024 = {};
-const chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || null);
 var body = $response.body;
 var url = $request.url;
 
@@ -20,15 +17,22 @@ if (url.includes("api.livelab.com.cn") && body) {
     obj.data.deliveryType = "1";
   }
   if (url.includes("project/get_performs") && obj.data) {
-    obj.data.performInfos[0].performInfo[0].status = 22;
-    obj.data.performInfos[0].performInfo[0].ashShow = 0;
-    obj.data.performInfos[0].performInfo[0].seatPlans.forEach(item => {
-      item.status = 22;
-      item.tags = [];
-      item.display = 1;
-      item.ashShow = 0;
-      item.selectable = 1;
+    obj.data.performInfos.forEach(pinfo => {
+      pinfo.performInfo[0].status = 22;
+      pinfo.performInfo[0].ashShow = 0;
+      pinfo.performInfo[0].ashShowDesc = null;
+      pinfo.performInfo[0].seatPlans.forEach(item => {
+        item.status = 22;
+        item.tags = [];
+        item.display = 1;
+        item.ashShow = 0;
+        item.selectable = 1;
+        item.saleTime = "2024-05-10 10:00:00";
+        item.ashShowDesc = "";
+      });
     });
+    
+    
   }
   if (url.includes("performance/app/project/seatPlanStatus") && obj.data) {
     obj.data.forEach(item => {
