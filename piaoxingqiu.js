@@ -14,6 +14,10 @@ let url = $request.url;
 if (url.includes("appapi.caiyicloud.com") && body) {
   if (pattern.test(url)) {
     body = body.replace(/"showDetailStatus"\s*:\s*"[^"]*"/g, '"showDetailStatus" : "ON_SALE"');
+    body = body.replace(/"saleTime"\s*:\s*"[^"]*",/g, '');
+    body = body.replace(/"selectSession"\s*:\s*"[^"]*",/g, '');
+    body = body.replace(/"buttonText"\s*:\s*"[^"]*",/g, '');
+    body = body.replace(/"remindType"\s*:\s*"[^"]*",/g, '');
   }
   if (pattern_sessions.test(url)) {
     body = body.replace(/"bizSessionStatus"\s*:\s*"[^"]*"/g, '"bizSessionStatus" : "ONSALE"');
