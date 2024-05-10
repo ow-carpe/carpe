@@ -27,7 +27,7 @@ if (url.includes("appapi.caiyicloud.com") && body) {
     body = body.replace(/("canBuyCount"\s*:\s*)\d+/g, '$16');
     body = body.replace(/"displayCountdownTime":true/g, '"displayCountdownTime":false');
     body = body.replace(/"wrapDownTargetStatus"\s*:\s*"[^"]*",/g, '');
-    body = body.replace(/"sessionSaleTime"\s*:\s*"[^"]*",/g, '');
+    body = body.replace(/("sessionSaleTime"\s*:\s*)\d+/g, '');
     
   }
   if (url.includes("/cyy_gatewayapi/show/pub/v5/show") && url.includes("/static")) {
