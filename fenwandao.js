@@ -1,7 +1,7 @@
 /*************************************
 **************************************
 [rewrite_local]
-^https:\/\/api\.livelab\.com\.cn\/performance\/app\/project\/(get_performs|seatPlanStatus) url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/fenwandao.js
+^https:\/\/api\.livelab\.com\.cn\/performance\/app\/project\/(get_performs|seatPlanStatus|dynamic\/get_project_info) url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/fenwandao.js
 [mitm]
 hostname = api.livelab.com.cn
 *************************************/
@@ -54,6 +54,20 @@ if (/\/performance\/app\/project\/get_performs/.test(url)) {
     $notify("livelab seatPlanStatus伪造失败", e+"", $response.body?.slice(0,300));
     $done({});
   }
+}else if (/\/performance\/app\/project\/dynamic\/get_project_info/.test(url)) {
+  // 3. get_project_info接口处理
+  try {
+    let json = JSON.parse($response.body);
+    if (json?.data && json.data.buttonStatus !== 1) {
+      json.data.buttonStatus = 1;
+      json.data._note = "脚本已改为可购状态";
+    }
+    $done({ body: JSON.stringify(json) });
+  } catch(e) {
+    $notify("livelab get_project_info伪造失败", e+"", $response.body?.slice(0,300));
+    $done({});
+  }
+
 } else {
   // 其他情况不处理
   $done({});
