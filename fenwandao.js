@@ -10,7 +10,7 @@ hostname = api.livelab.com.cn
 // @name         纷玩岛查票结果万能改写
 // @description  QuanX响应体-将所有不可购票档变为可购（含所有主流可购标志位）
 // ==/UserScript==
-
+ 
 let body = $response.body;
 try {
   let json = JSON.parse(body);
