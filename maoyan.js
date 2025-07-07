@@ -15,6 +15,26 @@ hostname = yanchu.maoyan.com
 
 let body = $response.body;
 try {
+
+    let url = $request.url || "";
+
+    // 1. 特判 validateStock 库存不足的响应，直接替换后立即 return
+    if (url.includes("/showTickets/validateStock")) {
+        let obj = JSON.parse(body);
+        if(obj && obj.success === false && obj.error && obj.error.code === 1500) {
+            body = JSON.stringify({
+                success: true,
+                data: true,
+                attrMaps: obj.attrMaps || {},
+                error: null,
+                paging: null
+            });
+            $done({body});
+            return; // 这里直接返回，后面逻辑不再执行
+        }
+    }
+
+    // 2. 处理 tickets（门票列表）
     let obj = JSON.parse(body);
 
     if (obj && obj.data && Array.isArray(obj.data.ticketsVO)) {
@@ -31,7 +51,7 @@ try {
             }
         });
     }
-     // 处理 showListVO 场次数据
+    // 3. 处理 shows（场次列表）
     if (obj && obj.data && Array.isArray(obj.data.showListVO)) {
         obj.data.showListVO.forEach(show => {
             // showStatus=2 表示售罄，0表示可购
@@ -43,16 +63,7 @@ try {
             }
         });
     }
-    if(obj && obj.success === false && obj.error && obj.error.code === 1500) {
-        // 完全替换为指定内容
-        body = JSON.stringify({
-            success: true,
-            data: true,
-            attrMaps: obj.attrMaps || {},
-            error: null,
-            paging: null
-        });
-    }
+    
     body = JSON.stringify(obj);
 } catch(e) {
     console.log("猫眼票务伪造出错:", e);
