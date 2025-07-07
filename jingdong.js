@@ -3,6 +3,12 @@
 // @author       你的名字
 // @description  Quantumult X 京东自动获取Cookie，通知显示
 // ==/UserScript==
+/*************************************
+[rewrite_local]
+^https:\/\/api\.m\.jd\.com\/client\.action.* url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/jingdong.js
+[mitm]
+hostname = yanchu.maoyan.com
+*************************************/
 
 if ($request && $request.headers) {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
