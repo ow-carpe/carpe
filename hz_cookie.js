@@ -7,7 +7,7 @@
 ^https:\/\/hweb-personalcenter\.huazhu\.com\/personalCenter\/rightAndInterest\/getBriefInfo url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/hz_cookie.js
 
 [mitm]
-hostname = appgw.huazhu.com
+hostname = hweb-personalcenter.huazhu.com
 *************************************/
 
 // 获取当前日期字符串
