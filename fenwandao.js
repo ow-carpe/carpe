@@ -1,5 +1,4 @@
 /*************************************
-项目名称：
 **************************************
 [rewrite_local]
 ^https:\/\/api\.livelab\.com\.cn\/performance\/app\/project\/get_performs\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/fenwandao.js
@@ -8,29 +7,34 @@ hostname = api.livelab.com.cn
 *************************************/
 
 // ==UserScript==
-// @name         纷玩岛查票结果修改
-// @description  QuanX响应体改写-把所有席位改为有票且可买
+// @name         纷玩岛查票结果万能改写
+// @description  QuanX响应体-将所有不可购票档变为可购（含所有主流可购标志位）
 // ==/UserScript==
 
 let body = $response.body;
 try {
   let json = JSON.parse(body);
 
-  // 遍历每个演出日期
   json?.data?.performInfos?.forEach(performInfo => {
     performInfo.performInfo?.forEach(perform => {
-      // 遍历所有票档
       perform.seatPlans?.forEach(plan => {
-        // 原本可售=0的票档 改为可售、并加上自定义标记
-        if(plan.ableSell === 0){
-          plan.ableSell = 1;           // 可售
-          plan.ableSaleQuantity = 100; // 可买数量
-          plan.leftStock = 100;        // 库存
-          plan.status = 21;            // 21=可售
-          plan.shelfStatus = 1;        // 上架
-          plan.seatPlanName = plan.seatPlanName + "(测试票)";
-          // 给标签加个自定义样式提示
-          plan.tags = [{type:99, tag:"测试票-仅展示"}];
+        // 只改"不可购买"的（以selectable、ableSaleQuantity、status为例）
+        if (
+          plan.selectable !== 1 ||
+          !plan.ableSaleQuantity ||
+          !plan.leftStock ||
+          plan.status !== 21
+        ) {
+          plan.selectable = 1;
+          plan.ableSaleQuantity = 99;
+          plan.leftStock = 99;
+          plan.status = 21;
+          plan.shelfStatus = 1;
+          plan.stopSale = 0;
+          plan.ashShow = 0;
+          plan.display = 1;
+          plan.seatPlanName = (plan.seatPlanName || "") + "(脚本可买)";
+          plan.tags = [{type: 100, tag: "脚本测试票"}];
         }
       });
     });
@@ -38,7 +42,7 @@ try {
 
   $done({ body: JSON.stringify(json) });
 } catch(e) {
-  $notify("查票改写异常", e + "", body.slice(0,200));
+  $notify("查票改写异常", e+"", body && body.substr(0,200));
   $done({});
 }
 
