@@ -1,11 +1,41 @@
+[rewrite_local]
+^https:\/\/yanchu\.maoyan\.com\/my\/odea\/show\/tickets?.* url script-response-body https://your.cdn.com/maoyan_ticket_modify.js
+[mitm]
+hostname = yanchu.maoyan.com
+
+// ==UserScript==
+// @name         猫眼门票伪造有票
+// @description  QuanX修改猫眼返回内容，所有票型都显示有票可买
+// ==/UserScript==
+
+let body = $response.body;
+try {
+    let obj = JSON.parse(body);
+
+    if (obj && obj.data && Array.isArray(obj.data.ticketsVO)) {
+        obj.data.ticketsVO.forEach(ticket => {
+            // 只处理本来无票的项目（showStatus=2且remainingStock=0）
+            if(ticket.showStatus === 2 && ticket.remainingStock === 0) {
+                ticket.showStatus = 0; // 可买
+                ticket.remainingStock = 99; // 假定剩余99张
+                if(ticket.ticketName) {
+                    // 可选：名字加“【伪】”方便识别
+                    ticket.ticketName += "【伪】";
+                }
+            }
+        });
+        body = JSON.stringify(obj);
+    }
+} catch(e) {
+    console.log("猫眼票务伪造出错:", e);
+}
+$done({body});
+
 /*************************************
 项目名称：
 **************************************
-[rewrite_local]
-^https:\/\/yanchu\.maoyan\.com\/myshow\/ajax url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
-[mitm]
-hostname = yanchu.maoyan.com
-*************************************/
+
+*********************************
 
 var regex = /\/myshow\/ajax\/v2\/performance\/\d+\/shows/;
 var body = $response.body;
@@ -43,6 +73,7 @@ if (url.includes("yanchu.maoyan.com") && body) {
     body = body.replace(/("currentAmount"\s*:\s*)\d+/g, '$16');
     body = body.replace(/("maxBuyLimit"\s*:\s*)\d+/g, '$16');
   }
+  ****/
   $done({body});
 } else {
   $done({})
