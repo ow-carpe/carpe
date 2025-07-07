@@ -1,12 +1,15 @@
-// ==UserScript==
-// @name         猫眼门票伪造有票 ！！
-// @description  QuanX修改猫眼 返回内容，所有票型都显示有票可买
-// ==/UserScript==
-
+/*************************************
+**************************************
 [rewrite_local]
 ^https:\/\/yanchu\.maoyan\.com\/my\/odea\/project\/(shows|tickets)\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 [mitm]
 hostname = yanchu.maoyan.com
+*************************************/
+
+// ==UserScript==
+// @name         猫眼门票伪造有票 ！！
+// @description  QuanX修改猫眼 返回内容，所有票型都显示有票可买
+// ==/UserScript==
 
 let body = $response.body;
 try {
