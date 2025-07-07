@@ -5,7 +5,7 @@
 // ==/UserScript==
 /*************************************
 [rewrite_local]
-^https:\/\/api\.m\.jd\.com\/client\.action.*pt_key=.*&pt_pin=.* url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/jingdong.js
+^https:\/\/api\.m\.jd\.com\/client\.action.* url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/jingdong.js
 [mitm]
 hostname = api.m.jd.com
 *************************************/
