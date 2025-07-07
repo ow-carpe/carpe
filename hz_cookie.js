@@ -4,7 +4,7 @@
 // ==/UserScript==
 /*************************************
 [rewrite_local]
-^https:\/\/appgw\.huazhu\.com\/game\/sign_header\? url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/hz_cookie.js
+^https:\/\/hweb-personalcenter\.huazhu\.com\/personalCenter\/rightAndInterest\/getBriefInfo url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/hz_cookie.js
 
 [mitm]
 hostname = appgw.huazhu.com
