@@ -21,11 +21,11 @@ try {
         // 只改带有缺票登记的
         if (plan.display === 3) {
           plan.display = 1;             // 让前端显示为可购
-          plan.tags = [{type:4, tag:"脚本可购"}]; // 标记已改
+          plan.tags = []; // 标记已改
           plan.leftStock = 6;           // 随便写点余票数
           plan.ableSaleQuantity = 6;
-          plan.status = 21;             // 通常21可购，22不可购
-          //plan.seatPlanName += "(脚本可购)";
+          plan.status = 22;             
+          plan.seatPlanName += "(脚本可购)";
         }
       });
     });
