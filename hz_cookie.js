@@ -2,6 +2,13 @@
 // @name         华住会Cookie获取
 // @description  Quantumult X 自动获取华住会 Cookie 持久化
 // ==/UserScript==
+/*************************************
+[rewrite_local]
+^https:\/\/appgw\.huazhu\.com\/game\/sign_header\? url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/hz_cookie.js
+
+[mitm]
+hostname = appgw.huazhu.com
+*************************************/
 
 if ($request && $request.headers) {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
