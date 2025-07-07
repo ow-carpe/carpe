@@ -29,7 +29,7 @@ if (/\/performance\/app\/project\/get_performs/.test(url)) {
             plan.ashShowDesc = "";
             plan.ashShow = 0;
             plan.selectable = 1;
-            item.saleTime = "2025-07-07 10:00:00";
+            plan.saleTime = "2025-07-07 10:00:00";
           }
         });
       });
