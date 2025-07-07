@@ -1,6 +1,5 @@
 // ==UserScript==
 // @name         京东Cookie获取
-// @author       你的名字
 // @description  Quantumult X 京东自动获取Cookie，Cookie变化才提示
 // ==/UserScript==
 /*************************************
