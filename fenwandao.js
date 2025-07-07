@@ -20,13 +20,17 @@ if (/\/performance\/app\/project\/get_performs/.test(url)) {
         perform.seatPlans?.forEach(plan => {
           // 只针对 display=3且有"缺票登记"的票档（无票），修改为可购
           if (plan.display === 3) {
-          plan.display = 1;             // 让前端显示为可购
-          plan.tags = []; // 标记已改
-          plan.leftStock = 6;           // 随便写点余票数
-          plan.ableSaleQuantity = 6;
-          plan.status = 22;             
-          plan.seatPlanName += "(脚本可购)";
-        }
+            plan.display = 1;             // 让前端显示为可购
+            plan.tags = []; // 标记已改
+            plan.leftStock = 6;           // 随便写点余票数
+            plan.ableSaleQuantity = 6;
+            plan.status = 22;             
+            plan.seatPlanName += "(脚本可购)";
+            plan.ashShowDesc = "";
+            plan.ashShow = 0;
+            plan.selectable = 1;
+            item.saleTime = "2025-07-07 10:00:00";
+          }
         });
       });
     });
