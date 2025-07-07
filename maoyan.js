@@ -3,6 +3,7 @@
 [rewrite_local]
 ^https:\/\/yanchu\.maoyan\.com\/my\/odea\/show\/tickets\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 ^https:\/\/yanchu\.maoyan\.com\/my\/odea\/project\/shows\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
+^https:\/\/yanchu\.maoyan\.com\/my\/odea\/showTickets\/validateStock\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/maoyan.js
 [mitm]
 hostname = yanchu.maoyan.com
 *************************************/
@@ -40,6 +41,16 @@ try {
                     show.showName += "【伪】";
                 }
             }
+        });
+    }
+    if(obj && obj.success === false && obj.error && obj.error.code === 1500) {
+        // 完全替换为指定内容
+        body = JSON.stringify({
+            success: true,
+            data: true,
+            attrMaps: obj.attrMaps || {},
+            error: null,
+            paging: null
         });
     }
     body = JSON.stringify(obj);
