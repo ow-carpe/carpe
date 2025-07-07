@@ -1,7 +1,7 @@
 /*************************************
 **************************************
 [rewrite_local]
-^https:\/\/api\.livelab\.com\.cn\/performance\/app\/project\/get_performs\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/fenwandao.js
+^https:\/\/api\.livelab\.com\.cn\/performance\/app\/project\/(get_performs|seatPlanStatus) url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/fenwandao.js
 [mitm]
 hostname = api.livelab.com.cn
 *************************************/
@@ -10,16 +10,16 @@ hostname = api.livelab.com.cn
 // @name         纷玩岛查票结果万能改写
 // @description  QuanX响应体-将所有不可购票档变为可购（含所有主流可购标志位）
 // ==/UserScript==
- 
-let body = $response.body;
-try {
-  let json = JSON.parse(body);
-
-  json?.data?.performInfos?.forEach(performInfo => {
-    performInfo.performInfo?.forEach(perform => {
-      perform.seatPlans?.forEach(plan => {
-        // 只改带有缺票登记的
-        if (plan.display === 3) {
+const url = $request.url || "";
+if (/\/performance\/app\/project\/get_performs/.test(url)) {
+  // get_performs接口处理
+  try {
+    let json = JSON.parse($response.body);
+    json?.data?.performInfos?.forEach(performInfo => {
+      performInfo.performInfo?.forEach(perform => {
+        perform.seatPlans?.forEach(plan => {
+          // 只针对 display=3且有"缺票登记"的票档（无票），修改为可购
+          if (plan.display === 3) {
           plan.display = 1;             // 让前端显示为可购
           plan.tags = []; // 标记已改
           plan.leftStock = 6;           // 随便写点余票数
@@ -27,15 +27,34 @@ try {
           plan.status = 22;             
           plan.seatPlanName += "(脚本可购)";
         }
+        });
       });
     });
-  });
-
-  $done({ body: JSON.stringify(json) });
-} catch(e) {
-  $notify("查票改写异常", e+"", body && body.substr(0,200));
+    $done({ body: JSON.stringify(json) });
+  } catch(e) {
+    $notify("livelab get_performs伪造失败", e+"", $response.body?.slice(0,300));
+    $done({});
+  }
+} else if (/\/performance\/app\/project\/seatPlanStatus/.test(url)) {
+  // seatPlanStatus接口处理
+  try {
+    let json = JSON.parse($response.body);
+    json?.data?.forEach(plan => {
+      if (plan.soldOutFlag === true) {
+        plan.soldOutFlag = false;
+        plan._note = "脚本已改为有票";
+      }
+    });
+    $done({ body: JSON.stringify(json) });
+  } catch(e) {
+    $notify("livelab seatPlanStatus伪造失败", e+"", $response.body?.slice(0,300));
+    $done({});
+  }
+} else {
+  // 其他情况不处理
   $done({});
 }
+
 
 /*****
 var body = $response.body;
