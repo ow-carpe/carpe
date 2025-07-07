@@ -18,23 +18,14 @@ try {
   json?.data?.performInfos?.forEach(performInfo => {
     performInfo.performInfo?.forEach(perform => {
       perform.seatPlans?.forEach(plan => {
-        // 只改"不可购买"的（以selectable、ableSaleQuantity、status为例）
-        if (
-          plan.selectable !== 1 ||
-          !plan.ableSaleQuantity ||
-          !plan.leftStock ||
-          plan.status !== 21
-        ) {
-          plan.selectable = 1;
-          plan.ableSaleQuantity = 99;
-          plan.leftStock = 99;
-          plan.status = 21;
-          plan.shelfStatus = 1;
-          plan.stopSale = 0;
-          plan.ashShow = 0;
-          plan.display = 1;
-          plan.seatPlanName = (plan.seatPlanName || "") + "(脚本可买)";
-          plan.tags = [{type: 100, tag: "脚本测试票"}];
+        // 只改带有缺票登记的
+        if (plan.display === 3 && plan.tags?.some(t => t.tag === "缺票登记")) {
+          plan.display = 1;             // 让前端显示为可购
+          plan.tags = [{type:100, tag:"脚本可购票"}]; // 标记已改
+          plan.leftStock = 6;           // 随便写点余票数
+          plan.ableSaleQuantity = 6;
+          plan.status = 21;             // 通常21可购，22不可购
+          plan.seatPlanName += "(脚本可购)";
         }
       });
     });
