@@ -1,5 +1,6 @@
 [rewrite_local]
 ^https:\/\/yanchu\.maoyan\.com\/my\/odea\/project\/(shows|tickets)\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/refs/heads/master/maoyan.js
+[mitm]
 hostname = yanchu.maoyan.com
 
 // ==UserScript==
