@@ -1,5 +1,5 @@
 [rewrite_local]
-^https:\/\/yanchu\.maoyan\.com\/my\/odea\/show\/tickets?.* url script-response-body https://your.cdn.com/maoyan_ticket_modify.js
+^https:\/\/yanchu\.maoyan\.com\/my\/odea\/project\/(shows|tickets)\? url script-response-body https://你的cdn.com/maoyan_ticket_modify.js
 [mitm]
 hostname = yanchu.maoyan.com
 
@@ -22,10 +22,23 @@ try {
                     // 可选：名字加“【伪】”方便识别
                     ticket.ticketName += "【伪】";
                 }
+                
             }
         });
-        body = JSON.stringify(obj);
     }
+     // 处理 showListVO 场次数据
+    if (obj && obj.data && Array.isArray(obj.data.showListVO)) {
+        obj.data.showListVO.forEach(show => {
+            // showStatus=2 表示售罄，0表示可购
+            if (show.showStatus === 2) {
+                show.showStatus = 0; // 可购
+                if(show.showName && !show.showName.includes('【伪】')) {
+                    show.showName += "【伪】";
+                }
+            }
+        });
+    }
+    body = JSON.stringify(obj);
 } catch(e) {
     console.log("猫眼票务伪造出错:", e);
 }
