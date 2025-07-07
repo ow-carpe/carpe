@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         华住会Cookie获取(每日首次通知)
+// @name         华住会Cookie获取(每日首次通知) 
 // @description  Quantumult X 自动获取华住会 Cookie，每天只处理一次
 // ==/UserScript==
 /*************************************
