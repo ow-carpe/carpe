@@ -7,7 +7,7 @@ hostname = api.livelab.com.cn
 *************************************/
 
 // ==UserScript==
-// @name         纷玩岛查票结果万能改写
+// @name         纷玩岛查票结果万能改写 
 // @description  QuanX响应体-将所有不可购票档变为可购（含所有主流可购标志位）
 // ==/UserScript==
 const url = $request.url || "";
