@@ -4,7 +4,7 @@
 hostname = yanchu.maoyan.com
 
 // ==UserScript==
-// @name         猫眼门票伪造有票
+// @name         猫眼门票伪造有票 
 // @description  QuanX修改猫眼返回内容，所有票型都显示有票可买
 // ==/UserScript==
 
