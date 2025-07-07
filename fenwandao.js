@@ -11,7 +11,7 @@ var body = $response.body;
 var url = $request.url;
 
 if (url.includes("api.livelab.com.cn") && body) {
-  var obj = JSON.parse($response.body);
+  /*****var obj = JSON.parse($response.body);
   if (url.includes("app/project/get_project_info") && obj.data) {
     obj.data.buttonStatus = 1;
     obj.data.deliveryType = "1";
@@ -51,6 +51,7 @@ if (url.includes("api.livelab.com.cn") && body) {
       item.maxBuyLimit = 6;
     });
     }
+    ****/
   }
   $done({ body: JSON.stringify(obj) });
 } else {
