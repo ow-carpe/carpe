@@ -12,6 +12,7 @@ hostname = api.m.jd.com
 
 if ($request && $request.headers) {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
+  console.log("京东cookie：\n" + cookie);
   if (cookie && /pt_key=.+?;.+pt_pin=.+?;/.test(cookie)) {
     // 保存 Cookie 到持久化
     $persistentStore.write(cookie, "JD_COOKIE");
