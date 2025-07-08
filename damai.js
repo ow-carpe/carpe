@@ -23,8 +23,8 @@ try {
         if (lackTag || isNoTicket) {
           // 伪造可购买
           sku.skuSalable = true;
-          sku.salableQuantity = 99;
-          sku.mq = 99;
+          sku.salableQuantity = 6;
+          sku.mq = 6;
           sku.frontEndStatus = 1;
           sku.status = 1;
           sku.tags = [];
