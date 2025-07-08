@@ -9,27 +9,30 @@ try {
   let obj = JSON.parse(body);
   if (obj && obj.data && typeof obj.data.result === "string") {
     let result = JSON.parse(obj.data.result);
+
     if (result.perform && Array.isArray(result.perform.skuList)) {
       result.perform.skuList.forEach(sku => {
-        // “缺货登记”或前端不可售或库存0，才处理
+        // 只处理不可售的
         const isLack = 
-          (sku.tags && sku.tags.some(t => t.tagDesc && t.tagDesc.includes('缺货'))) ||
-          (sku.otherTag && sku.otherTag.tagDesc && sku.otherTag.tagDesc.includes('缺货')) ||
-          sku.frontEndStatus == 2 ||
-          sku.skuSalable === false ||
-          sku.salableQuantity == 0;
+          sku.frontEndStatus != 1 || 
+          !sku.skuSalable || 
+          sku.salableQuantity == 0 ||
+          (sku.tags && sku.tags.some(t => t.tagDesc && t.tagDesc.includes("缺货")));
         if (isLack) {
+          sku.frontEndStatus = 1;
+          sku.status = 1;
           sku.skuSalable = true;
           sku.salableQuantity = 99;
           sku.mq = 99;
-          sku.frontEndStatus = 1;
-          sku.status = 1;
           sku.buyPermission = true;
           sku.clickable = true;
+          sku.packagesFlag = false;
+          sku.freePackage = false;
+          // 彻底清理标签和缺货提示
           sku.tags = [];
           sku.otherTag = null;
           if (sku.tips) delete sku.tips;
-          // 名称后缀【伪】
+          // 名字后缀【伪】
           if (sku.priceName && !sku.priceName.includes("【伪】")) sku.priceName += "【伪】";
         }
       });
@@ -38,6 +41,6 @@ try {
     body = JSON.stringify(obj);
   }
 } catch (e) {
-  console.log("大麦票档伪造出错：", e);
+  console.log("大麦票务伪造出错:", e);
 }
 $done({body});
