@@ -5,33 +5,48 @@ hostname = acs.m.taobao.com
 *************************/
 
 // ==UserScript==
-// @name         大麦门票缺货档伪造有票-最大数量
-// @description  大麦skuList缺货档伪造成可购，字段按有票档模板，数量不超最大可售值
-// ==/UserScript==
-
-// ==UserScript==
-// @name         大麦票务字段单改实验
-// @description  只修改一个字段做前端实验，排查签名影响
+// @name         大麦票务缺货改有票
+// @description  只把缺货票档变成有货，数量与最大有货票档一致，字段完全一致
 // ==/UserScript==
 
 let body = $response.body;
 try {
     let obj = JSON.parse(body);
 
-    // 这里的 data.result 是字符串，需先 JSON.parse 一下
+    // 1. 解析 result 字符串为对象
     if (obj && obj.data && typeof obj.data.result === 'string') {
         let resultObj = JSON.parse(obj.data.result);
 
-        // 找到 skuList，只改第一个票档的 priceName，别的啥都不动
-        if (resultObj.perform && Array.isArray(resultObj.perform.skuList) && resultObj.perform.skuList.length > 0) {
-            resultObj.perform.skuList[0].priceName += '【测试】';
+        // 2. 找到skuList
+        if (resultObj.perform && Array.isArray(resultObj.perform.skuList)) {
+            // 3. 找到一个“真正有票”的sku，作为模板
+            let template = resultObj.perform.skuList.find(item =>
+                item.salableQuantity == "6" && item.skuSalable == "true"
+            );
+            // 如果没找到全新有票的，就用第一条
+            if (!template) template = resultObj.perform.skuList[0];
+
+            // 4. 修改所有缺货的sku
+            resultObj.perform.skuList.forEach(item => {
+                if (item.salableQuantity === "0" || item.skuSalable === false || item.skuSalable === "false") {
+                    // 只改最核心的三个字段，其它字段一律不动
+                    item.salableQuantity = template.salableQuantity;
+                    item.mq = template.mq;
+                    item.skuSalable = template.skuSalable;
+                    item.frontEndStatus = template.frontEndStatus; // 确保状态一致
+                    item.status = template.status;
+                    item.tags = []; // 缺货标签去掉
+                    // 可选：名字加个标识方便你识别
+                    item.priceName += "【伪】";
+                }
+            });
         }
 
-        // 改完后转回字符串
+        // 5. stringify回 result
         obj.data.result = JSON.stringify(resultObj);
     }
     body = JSON.stringify(obj);
 } catch(e) {
-    console.log("大麦票务字段单改实验出错:", e);
+    console.log("大麦票务缺货转有票脚本异常:", e);
 }
 $done({body});
