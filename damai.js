@@ -30,12 +30,12 @@ try {
             resultObj.perform.skuList.forEach(item => {
                 if (item.salableQuantity === "0" || item.skuSalable === false || item.skuSalable === "false") {
                     // 只改最核心的三个字段，其它字段一律不动
-                    item.salableQuantity = template.salableQuantity;
-                    item.mq = template.mq;
-                    item.skuSalable = template.skuSalable;
-                    item.frontEndStatus = template.frontEndStatus; // 确保状态一致
+                   // item.salableQuantity = template.salableQuantity;
+                    //item.mq = template.mq;
+                   // item.skuSalable = template.skuSalable;
+                   // item.frontEndStatus = template.frontEndStatus; // 确保状态一致
                     item.status = template.status;
-                    item.tags = []; // 缺货标签去掉
+                   // item.tags = []; // 缺货标签去掉
                     // 可选：名字加个标识方便你识别
                     item.priceName += "【伪】";
                 }
