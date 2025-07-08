@@ -18,6 +18,8 @@ if (/\/performance\/app\/project\/get_performs/.test(url)) {
     json?.data?.performInfos?.forEach(performInfo => {
       performInfo.performInfo?.forEach(perform => {
         perform.status = 22;  
+        perform.saleTime = "2025-07-07 10:00:00";
+        perform.ashShow = 0;
         perform.seatPlans?.forEach(plan => {
           // 只针对 display=3且有"缺票登记"的票档（无票），修改为可购
           if (plan.display === 3 || plan.display === 6) {
