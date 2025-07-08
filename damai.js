@@ -1,4 +1,4 @@
-/*************************
+/************************* 
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.detail\.subpage\.getdetail\/2\.0\? url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/damai.js
 [mitm]
 hostname = acs.m.taobao.com
