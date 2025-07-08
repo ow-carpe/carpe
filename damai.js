@@ -4,38 +4,49 @@
 hostname = acs.m.taobao.com
 *************************/
 
-let body = $response.body;
-try {
-  let obj = JSON.parse(body);
-  if (obj && obj.data && typeof obj.data.result === "string") {
-    let result = JSON.parse(obj.data.result);
+// ==UserScript==
+// @name         大麦门票缺货档伪造有票-最大数量
+// @description  大麦skuList缺货档伪造成可购，字段按有票档模板，数量不超最大可售值
+// ==/UserScript==
 
-    if (result.perform && Array.isArray(result.perform.skuList)) {
-      result.perform.skuList.forEach(sku => {
-        // 一律处理
-        sku.status = 1;
-        sku.frontEndStatus = 1;
-        sku.skuSalable = true;
-        sku.salableQuantity = 99;
-        sku.mq = 99;
-        sku.buyPermission = true;
-        sku.clickable = true;
-        sku.packagesFlag = false;
-        sku.freePackage = false;
-        sku.tags = [];
-        sku.otherTag = null;
-        if (sku.tips) delete sku.tips;
-        // 处理字符串类型
-        ["status","frontEndStatus","salableQuantity","mq"].forEach(k=>{
-          if (typeof sku[k] !== "number") sku[k]=Number(sku[k])||1;
-        });
-        if (sku.priceName && !sku.priceName.includes("【伪】")) sku.priceName += "【伪】";
-      });
-    }
-    obj.data.result = JSON.stringify(result);
-    body = JSON.stringify(obj);
-  }
-} catch (e) {
-  console.log("大麦票务伪造出错:", e);
+let obj = JSON.parse($response.body);
+let result = JSON.parse(obj.data.result);
+
+if (result && result.perform && Array.isArray(result.perform.skuList)) {
+    // 找到有票（skuSalable为"true"且salableQuantity大于0）的第一项作为模板
+    const realTicket = result.perform.skuList.find(sku =>
+        sku.skuSalable === "true" && sku.salableQuantity !== "0"
+    );
+    // 找最大数量
+    const maxQty = result.perform.skuList.reduce((max, sku) => {
+        if (sku.skuSalable === "true" && parseInt(sku.salableQuantity) > max) {
+            return parseInt(sku.salableQuantity);
+        }
+        return max;
+    }, 0);
+    // 模板字段
+    const tpl = Object.assign({}, realTicket);
+
+    result.perform.skuList = result.perform.skuList.map(sku => {
+        // 缺货造票
+        if (sku.skuSalable !== "true" || sku.salableQuantity === "0") {
+            let fake = Object.assign({}, tpl); // 完全拷贝
+            // 恢复票型自己的识别字段和价格字段
+            fake.skuId = sku.skuId;
+            fake.itemId = sku.itemId;
+            fake.priceId = sku.priceId;
+            fake.priceIdOfTC = sku.priceIdOfTC;
+            fake.priceName = sku.priceName;
+            fake.price = sku.price;
+            fake.dashPrice = sku.dashPrice;
+            // 数量设为最大可用票数
+            fake.salableQuantity = String(maxQty);
+            fake.mq = String(maxQty);
+            return fake;
+        }
+        return sku; // 有票的保留原样
+    });
 }
-$done({body});
+
+obj.data.result = JSON.stringify(result);
+$done({body: JSON.stringify(obj)});
