@@ -19,7 +19,7 @@ if (/\/performance\/app\/project\/get_performs/.test(url)) {
       performInfo.performInfo?.forEach(perform => {
         perform.seatPlans?.forEach(plan => {
           // 只针对 display=3且有"缺票登记"的票档（无票），修改为可购
-          if (plan.display === 3) {
+          if (plan.display === 3 || plan.display === 6) {
             plan.display = 1;             // 让前端显示为可购
             plan.tags = []; // 标记已改
             plan.leftStock = 6;           // 随便写点余票数
