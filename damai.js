@@ -9,44 +9,29 @@ hostname = acs.m.taobao.com
 // @description  大麦skuList缺货档伪造成可购，字段按有票档模板，数量不超最大可售值
 // ==/UserScript==
 
-let obj = JSON.parse($response.body);
-let result = JSON.parse(obj.data.result);
+// ==UserScript==
+// @name         大麦票务字段单改实验
+// @description  只修改一个字段做前端实验，排查签名影响
+// ==/UserScript==
 
-if (result && result.perform && Array.isArray(result.perform.skuList)) {
-    // 找到有票（skuSalable为"true"且salableQuantity大于0）的第一项作为模板
-    const realTicket = result.perform.skuList.find(sku =>
-        sku.skuSalable === "true" && sku.salableQuantity !== "0"
-    );
-    // 找最大数量
-    const maxQty = result.perform.skuList.reduce((max, sku) => {
-        if (sku.skuSalable === "true" && parseInt(sku.salableQuantity) > max) {
-            return parseInt(sku.salableQuantity);
-        }
-        return max;
-    }, 0);
-    // 模板字段
-    const tpl = Object.assign({}, realTicket);
+let body = $response.body;
+try {
+    let obj = JSON.parse(body);
 
-    result.perform.skuList = result.perform.skuList.map(sku => {
-        // 缺货造票
-        if (sku.skuSalable !== "true" || sku.salableQuantity === "0") {
-            let fake = Object.assign({}, tpl); // 完全拷贝
-            // 恢复票型自己的识别字段和价格字段
-            fake.skuId = sku.skuId;
-            fake.itemId = sku.itemId;
-            fake.priceId = sku.priceId;
-            fake.priceIdOfTC = sku.priceIdOfTC;
-            fake.priceName = sku.priceName;
-            fake.price = sku.price;
-            fake.dashPrice = sku.dashPrice;
-            // 数量设为最大可用票数
-            fake.salableQuantity = String(maxQty);
-            fake.mq = String(maxQty);
-            return fake;
+    // 这里的 data.result 是字符串，需先 JSON.parse 一下
+    if (obj && obj.data && typeof obj.data.result === 'string') {
+        let resultObj = JSON.parse(obj.data.result);
+
+        // 找到 skuList，只改第一个票档的 priceName，别的啥都不动
+        if (resultObj.perform && Array.isArray(resultObj.perform.skuList) && resultObj.perform.skuList.length > 0) {
+            resultObj.perform.skuList[0].priceName += '【测试】';
         }
-        return sku; // 有票的保留原样
-    });
+
+        // 改完后转回字符串
+        obj.data.result = JSON.stringify(resultObj);
+    }
+    body = JSON.stringify(obj);
+} catch(e) {
+    console.log("大麦票务字段单改实验出错:", e);
 }
-
-obj.data.result = JSON.stringify(result);
-$done({body: JSON.stringify(obj)});
+$done({body});
