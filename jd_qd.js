@@ -7,28 +7,25 @@ if (!COOKIE) {
 
 const url = `https://api.m.jd.com/client.action?functionId=signBeanAct`;
 const method = `POST`;
-
 const headers = {
-  'request-from': 'native',
-  'Sec-Fetch-Dest': 'empty',
-  'Connection': 'keep-alive',
-  'Accept-Encoding': 'gzip, deflate, br',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Sec-Fetch-Site': 'same-site',
-  'Origin': 'https://pro.m.jd.com',
-  'x-rp-client': 'h5_1.0.0',
-  'User-Agent': 'jdapp;iPhone;15.1.65;;;M/5.0;appBuild/169923;jdSupportDarkMode/1;lang/zh_CN;site/CN;elder/0;ef/1;ep/xxx;',
-  'Sec-Fetch-Mode': 'cors',
-  'Cookie': COOKIE,  // <-- 自动读取
-  'Host': 'api.m.jd.com',
-  'x-referer-page': 'https://pro.m.jd.com/mall/active/Md9FMi1pJXg2q7qc8CmE9FNYDS4/index.html',
-  'Referer': 'https://pro.m.jd.com/mall/active/Md9FMi1pJXg2q7qc8CmE9FNYDS4/index.html',
-  'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-  'Accept': '*/*'
+'request-from' : `native`,
+'Sec-Fetch-Dest' : `empty`,
+'Connection' : `keep-alive`,
+'Accept-Encoding' : `gzip, deflate, br`,
+'Content-Type' : `application/x-www-form-urlencoded`,
+'Sec-Fetch-Site' : `same-site`,
+'Origin' : `https://pro.m.jd.com`,
+'x-rp-client' : `h5_1.0.0`,
+'User-Agent' : `jdapp;iPhone;15.1.65;;;M/5.0;appBuild/169923;jdSupportDarkMode/1;lang/zh_CN;site/CN;elder/0;ef/1;ep/%7B%22ciphertype%22%3A5%2C%22cipher%22%3A%7B%22ud%22%3A%22DzvvD2O5DWPwYtU0YzG5EJcnENduCwOnYzOmDWS0CNrvYwU1YWVsZK%3D%3D%22%2C%22sv%22%3A%22CJqkDG%3D%3D%22%2C%22iad%22%3A%22%22%7D%2C%22ts%22%3A1751935372%2C%22hdid%22%3A%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw%3D%22%2C%22version%22%3A%221.0.3%22%2C%22appname%22%3A%22com.360buy.jdmobile%22%2C%22ridx%22%3A-1%7D;Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`,
+'Sec-Fetch-Mode' : `cors`,
+'Cookie' : COOKIE,
+'Host' : `api.m.jd.com`,
+'x-referer-page' : `https://pro.m.jd.com/mall/active/Md9FMi1pJXg2q7qc8CmE9FNYDS4/index.html`,
+'Referer' : `https://pro.m.jd.com/mall/active/Md9FMi1pJXg2q7qc8CmE9FNYDS4/index.html?stath=54&navh=44&babelChannel=ttt130&tttparams=8IE3ZImeyJyZnMiOiIwMDAwIiwicG9zTG5nIjoiMTIxLjQ1NzEiLCJ1ZW1wcyI6IjAtMi0wIiwiZ0xuZyI6IjEyMS40NTcxIiwiZ0xhdCI6IjM3LjQ1NDM5IiwibG5nIjoiMTIxLjI2MDQ2NCIsIm9yaWVudCI6InAiLCJvcyI6IjE4LjUiLCJsYnNMYXQiOiIzNy41MDcyMDYiLCJkTG5nIjoiIiwiZExhdCI6IiIsImxic0xuZyI6IjEyMS4yNjA1MTciLCJwcnN0YXRlIjoiMCIsImdwc19hcmVhIjoiMTNfMTA0Ml80NjUwNF81NDU1MiIsInNjYWxlIjoiMyIsImFkZHJlc3NJZCI6IjEyNjY3OTY1MDc3IiwidW5fYXJlYSI6IjEzXzEwNDJfMzUyOF81OTU5NiIsIndpZHRoIjoiMTI5MCIsImxic0FyZWEiOiIxM18xMDQyXzQ2NTA0XzU0NTUyIiwibGF0IjoiMzcuNTA3MTI4IiwibW9kZWwiOiJpUGhvbmUxNiwyIiwiY29ybmVyIjoxLCJhcmVhQ29kZSI6IjAiLCJwb3NMYXQiOiIzNy40NTQzOS7J9&embedMTab=1&mTabId=Md9FMi1pJXg2q7qc8CmE9FNYDS4`,
+'Accept-Language' : `zh-CN,zh-Hans;q=0.9`,
+'Accept' : `*/*`
 };
-
-const body = `functionId=signBeanAct&body=%7B%7D&appid=signed_wh5_ihub&client=apple&screen=430*749&networkType=wifi&openudid=xxx&uuid=xxx&clientVersion=15.1.65&d_model=iPhone16%2C2&osVersion=18.5&eid=xxx&h5st=xxx&x-api-eid-token=xxx`; // body原样
-
+const body = `functionId=signBeanAct&body=%7B%7D&appid=signed_wh5_ihub&client=apple&screen=430*749&networkType=wifi&openudid=79e7a95afb54c4997187d2a1c105b408ebe5aebd&uuid=79e7a95afb54c4997187d2a1c105b408ebe5aebd&clientVersion=15.1.65&d_model=iPhone16%2C2&osVersion=18.5&eid=TK3SZT6DOTS2JFHNL2LDEZX4YQ2G64OZQ2J4UPCX5QRKUVZI56WPUBKEOECWTL4EFN6TI3CRRX7ZC6GFAX6SOVE364&h5st=20250708084348174%3Bdaw3ipz9a2pam024%3B9d49c%3Btk03w8a671b5d18nF92EgTdtJIr8r2GY2wYnp1BhT2kQHrdbqHL08WHLtMnLDFQUweePtJfvA8rDXz93Bg6TPPB6QKmV%3B24c613da120921842ad88b4f73d18d65%3B5.1%3B1751935427174%3Bt6HsMeLi_6YW_lbW1GnSFh7RNdImOGLm_VImOuMsCerm0mMTLhImOuMsCmsgNVoVLd7hJp4W3eLWJprh4SrgMdIi9e4iLpIh5WbV9msm0msSo94VMZ4RMusmk_Mm5mYhINrV4ebi3uLh9Obi4O7h3ubVJJrVKhbhIJrg7uLmOGLm7pIRAp4WMusmk_ciBuMgMebRMlsmOGujMSLj92ch4xZVCJIVPZrUMuMgMWHmOuMsCm8iHx5i9tbaV9oYBmrVMuMgM64TK1YW8lsmOGujMaIT-NoaFlsm0mMV_lsmOGujxtsmkmrm0mci9aHWMusmOuMsCmbiOGLm_qbRMlsmOusmk_sgBuMgMmbi5lImOusmOGujMqYY8BoUbpYU8_ImOGLmBxoVApISMusmOuMsCurm0msg5lImOusmOGuj_uMgMSbRMlsmOusmk_sh6uMgMWbRMlsmOusmk_siOGLm5aHWMusmOuMsCurm0msh5lImOusmOGuj7Srm0m8i5lImOusmOGujMaLj92siPZoRF9ImOGLm9aHWMusmOuMsCurm0m8U3lsmOusmk_chOGLm79ImOusmOGuj_uMgM_ImOusmOGuj_uMgMe4RMusmOuMsztMgMeITJdnQJlsmOGujxtsmkmsg5m7i3Sbj8S7i_W7i8mLmOGLm9uHmOusmOG_QOGLm_tHmOuMsCmsYOi5bOiYWhtcVDJoTOa7X2qrmbxqmJ14TGtZUOapart8gJ14TGtZUMuMgMqYR7lsmOG_Q%3B45e4f9be0df4a28f9bbfd4ee897d5599%3Bri_uKJKT-JoRL1YRI9MT-J4S8ZIZ61YVF94WCeHTJJoTL9cQKxIWCeYU_tXW&x-api-eid-token=jdd03TK3SZT6DOTS2JFHNL2LDEZX4YQ2G64OZQ2J4UPCX5QRKUVZI56WPUBKEOECWTL4EFN6TI3CRRX7ZC6GFAX6SOVE364AAAAMX456CWNQAAAAADHAG5JQCO5A6OUX`;
 const myRequest = { url, method, headers, body };
 
 $task.fetch(myRequest).then(response => {
