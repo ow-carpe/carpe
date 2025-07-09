@@ -4,9 +4,9 @@
 // ==/UserScript==
 /*************************************
 [rewrite_local]
-^https:\/\/api\.m\.jd\.com\/client\.action.* url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/jd_cookies.js
+^https:\/\/my\.m\.jd\.com url script-request-header https://raw.githubusercontent.com/ow-carpe/carpe/master/jd_cookies.js
 [mitm]
-hostname = api.m.jd.com
+hostname = my.m.jd.com
 *************************************/
 
 // 获取当前日期字符串
