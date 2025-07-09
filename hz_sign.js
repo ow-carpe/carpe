@@ -14,7 +14,8 @@ if (!cookie || !cookie.includes("userToken=")) {
   $done();
 }
 
-const url = `https://appgw.huazhu.com/game/sign_in?date=1751936950`;
+const nowTs = Math.floor(Date.now()/1000); // 当前秒级时间戳
+const url = `https://appgw.huazhu.com/game/sign_in?date=${nowTs}`;
 const method = `GET`;
 const headers = {
 'Sec-Fetch-Dest' : `empty`,
