@@ -3,11 +3,6 @@
 // @description  Quantumult X 定时自动签到，带通知
 // ==/UserScript==
 
-// ==UserScript==
-// @name         华住会自动签到
-// @description  Quantumult X 定时自动签到，丰富通知
-// ==/UserScript==
-
 const cookie = $prefs.valueForKey("HZ_COOKIE") || "";
 if (!cookie || !cookie.includes("userToken=")) {
   $notify("❌ 华住会签到失败", "没有获取到Cookie", "请先手动抓包签到一次");
