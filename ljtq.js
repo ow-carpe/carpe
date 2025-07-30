@@ -1,6 +1,6 @@
 /********************************
 
-莉景天气会员破解 (双接口版) 
+莉景天气会员破解
 支持接口:
   - https://ljwapi.baichuan.tech/User/GetPrivateUsers
   - https://ljwapi.baichuan.tech/VIP/GetState
