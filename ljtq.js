@@ -49,7 +49,7 @@ try {
   if (url.includes("/VIP/GetState")) {
     body = body
       .replace(/"isLifelong":\d+/g, '"isLifelong":1')
-      .replace(/"vipType":\d+/g, '"vipType":4')
+      .replace(/"vipType":\d+/g, '"vipType":6')
       .replace(/"isDevice":\w+/g, '"isDevice":true')
       .replace(/"expiresTime":\d+/g, '"expiresTime":9999999999999');
   }
