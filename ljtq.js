@@ -1,11 +1,6 @@
 /********************************
 
 莉景天气会员破解
-支持接口:
-  - https://ljwapi.baichuan.tech/User/GetPrivateUsers
-  - https://ljwapi.baichuan.tech/VIP/GetState
-
-【Quantumult X 配置范例】
 ---------------------------------
 [rewrite_local]
 ^https:\/\/ljwapi\.baichuan\.tech\/User\/GetPrivateUsers url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/ljtq.js
