@@ -21,7 +21,7 @@ try {
     // 用户信息接口
     if (obj && obj.Result) {
       obj.Result.isVIP = true;
-      obj.Result.vipType = 2;
+      obj.Result.vipType = 1;
       obj.Result.expiresTime = 9999999999999;
       obj.Result.name = "VIP用户";
     }
@@ -31,7 +31,7 @@ try {
     // VIP状态接口
     if (obj && obj.Result) {
       obj.Result.isLifelong = 1;
-      obj.Result.vipType = 2;
+      obj.Result.vipType = 1;
       obj.Result.isDevice = true;
       obj.Result.expiresTime = 9999999999999;
     }
