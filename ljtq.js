@@ -8,8 +8,8 @@
 【Quantumult X 配置范例】
 ---------------------------------
 [rewrite_local]
-^https:\/\/ljwapi\.baichuan\.tech\/User\/GetPrivateUsers url script-response-body ljw_vip.js
-^https:\/\/ljwapi\.baichuan\.tech\/VIP\/GetState url script-response-body ljw_vip.js
+^https:\/\/ljwapi\.baichuan\.tech\/User\/GetPrivateUsers url script-response-body https://raw.githubusercontent.com/ow-carpe/carpe/master/ljtq.js
+^https:\/\/ljwapi\.baichuan\.tech\/VIP\/GetState url script-response-body lhttps://raw.githubusercontent.com/ow-carpe/carpe/master/ljtq.js
 
 [mitm]
 hostname = ljwapi.baichuan.tech
