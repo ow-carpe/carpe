@@ -21,7 +21,7 @@ try {
     // 用户信息接口
     if (obj && obj.Result) {
       obj.Result.isVIP = true;
-      obj.Result.vipType = 1;
+      obj.Result.vipType = 3;
       obj.Result.expiresTime = 9999999999999;
       obj.Result.name = "VIP用户";
     }
@@ -31,7 +31,7 @@ try {
     // VIP状态接口
     if (obj && obj.Result) {
       obj.Result.isLifelong = 1;
-      obj.Result.vipType = 1;
+      obj.Result.vipType = 3;
       obj.Result.isDevice = true;
       obj.Result.expiresTime = 9999999999999;
     }
@@ -43,13 +43,13 @@ try {
   if (url.includes("/User/GetPrivateUsers")) {
     body = body
       .replace(/"isVIP":\w+/g, '"isVIP":true')
-      .replace(/"name":".*?"/g, '"name":"VIP用户"')
+      .replace(/"name":".*?"/g, '"name":"VIP用户2"')
       .replace(/"expiresTime":\d+/g, '"expiresTime":9999999999999');
   }
   if (url.includes("/VIP/GetState")) {
     body = body
       .replace(/"isLifelong":\d+/g, '"isLifelong":1')
-      .replace(/"vipType":\d+/g, '"vipType":2')
+      .replace(/"vipType":\d+/g, '"vipType":3')
       .replace(/"isDevice":\w+/g, '"isDevice":true')
       .replace(/"expiresTime":\d+/g, '"expiresTime":9999999999999');
   }
