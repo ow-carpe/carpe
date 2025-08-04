@@ -15,10 +15,9 @@ let obj = JSON.parse($response.body);
 
 // 兼容判断防止报错
 try {
-    let body = $response.body;
-
-// 全局替换所有 NOT_STARTED 为 COMPLETED
-body = body.replace(/NOT_STARTED/g, "COMPLETED");
+ let body = $response.body;
+body = body.replace(/NOT_STARTED/g, "COMPLETED").replace(/false/g, "true");
+$done({ body });
 
 $done({ body });
 } catch (e) {}
