@@ -15,14 +15,12 @@ let obj = JSON.parse($response.body);
 
 // 兼容判断防止报错
 try {
-    if (
-        obj &&
-        obj.identityVerification &&
-        obj.identityVerification.verificationSteps &&
-        obj.identityVerification.verificationSteps.liveness
-    ) {
-        obj.identityVerification.verificationSteps.liveness.status = "NOT_STARTED";
-    }
+    let body = $response.body;
+
+// 全局替换所有 NOT_STARTED 为 COMPLETED
+body = body.replace(/NOT_STARTED/g, "COMPLETED");
+
+$done({ body });
 } catch (e) {}
 
 $done({ body: JSON.stringify(obj) });
